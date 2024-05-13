@@ -1,0 +1,3 @@
+<settingsSecurity>
+  <master>{{ encrypted_maven_master_password }}</master>
+</settingsSecurity>

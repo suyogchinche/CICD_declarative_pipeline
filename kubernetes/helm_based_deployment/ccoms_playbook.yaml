@@ -1,0 +1,7 @@
+---
+- name: "Cloud Comp OMS Deployment on kunernetes Cluster"
+  hosts: k8s_master
+  gather_facts: True
+  roles:
+  - ccoms
+  - weave

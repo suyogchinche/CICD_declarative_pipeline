@@ -1,0 +1,28 @@
+---
+# tasks file for weave
+
+- name: "Installing Weave scope on Rancher/OS Cluster"
+  shell: kubectl create -f https://cloud.weave.works/launch/k8s/weavescope.yaml
+  register: result
+  ignore_errors: True
+
+- debug:
+    msg: "{{ result }}"
+
+- fail:
+    msg: "weave scope deployment is failed"
+  when: "result.rc != 0 and result.stdout.find('AlreadyExists') != -1"
+
+- name: "Exposting service to external IP to access application from K8s master node"
+  shell: |
+    pod=$(kubectl get pod -n weave --selector=name=weave-scope-app -o jsonpath={.items..metadata.name})
+    kubectl expose pod $pod -n weave --external-ip="{{ ansible_default_ipv4.address }}" --port={{ weave_port }} --target-port={{ weave_port }}
+  register: result
+  ignore_errors: True
+
+- debug:
+    msg: "{{ result }}"
+
+- fail:
+    msg: "Weave scope is failed"
+  when: "result.rc != 0 and result.stdout.find('AlreadyExists') != -1"

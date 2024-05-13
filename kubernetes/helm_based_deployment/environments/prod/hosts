@@ -1,0 +1,8 @@
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host=mum00cuc ansible_port=22 ansible_user=root
+
+[k8s_nodes]
+k8s_master ansible_host=mum00aqm ansible_port=22 ansible_user=root

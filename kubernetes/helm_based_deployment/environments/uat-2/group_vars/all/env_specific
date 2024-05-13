@@ -1,0 +1,8 @@
+---
+# vars file for ccoms
+
+IMAGEPREFIX: compucomm
+LOGLEVEL: DEBUG
+PROFILE: dev
+NAMESPACE: ccoms
+helm_repo: https://github.com/svchinche/helm-chart.git

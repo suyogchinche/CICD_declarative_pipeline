@@ -1,0 +1,6 @@
+- name: "Installing Kubernetes python client for ansible"
+  hosts: localhost
+  gather_facts: True
+  roles:
+  - presetup
+

@@ -1,0 +1,65 @@
+---
+# tasks file for presetup
+
+- set_fact:
+    prod:
+      ansible:
+          ansible_host: "{{ lookup('env','PROD_ANSIBLE_HOST') }}"
+          ansible_user: "{{ lookup('env','PROD_ANSIBLE_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','PROD_ANSIBLE_PASSWORD') }}"
+      k8s:
+          ansible_host: "{{ lookup('env','PROD_K8S_HOST') }}"
+          ansible_user: "{{ lookup('env','PROD_K8S_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','PROD_K8S_PASSWORD') }}"
+
+    uat:
+      ansible:
+          ansible_host: "{{ lookup('env','UAT_ANSIBLE_HOST') }}"
+          ansible_user: "{{ lookup('env','UAT_ANSIBLE_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','UAT_ANSIBLE_PASSWORD') }}"
+      k8s:
+          ansible_host: "{{ lookup('env','UAT_K8S_HOST') }}"
+          ansible_user: "{{ lookup('env','UAT_K8S_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','UAT_K8S_PASSWORD') }}"
+
+    dev:
+      ansible:
+          ansible_host: "{{ lookup('env','DEV_ANSIBLE_HOST') }}"
+          ansible_user: "{{ lookup('env','DEV_ANSIBLE_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','DEV_ANSIBLE_PASSWORD') }}"
+      k8s:
+          ansible_host: "{{ lookup('env','DEV_K8S_HOST') }}"
+          ansible_user: "{{ lookup('env','DEV_K8S_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','DEV_K8S_PASSWORD') }}"
+
+    qa:
+      ansible:
+          ansible_host: "{{ lookup('env','QA_ANSIBLE_HOST') }}"
+          ansible_user: "{{ lookup('env','QA_ANSIBLE_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','QA_ANSIBLE_PASSWORD') }}"
+      k8s:
+          ansible_host: "{{ lookup('env','QA_K8S_HOST') }}"
+          ansible_user: "{{ lookup('env','QA_K8S_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','QA_K8S_PASSWORD') }}"
+
+    uat_2:
+      ansible:
+          ansible_host: "{{ lookup('env','UAT_2_ANSIBLE_HOST') }}"
+          ansible_user: "{{ lookup('env','UAT_2_ANSIBLE_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','UAT_2_ANSIBLE_PASSWORD') }}"
+      k8s:
+          ansible_host: "{{ lookup('env','UAT_2_K8S_HOST') }}"
+          ansible_user: "{{ lookup('env','UAT_2_K8S_USER') }}"
+          ansible_ssh_pass: "{{ lookup('env','UAT_2_K8S_PASSWORD') }}"
+
+
+- name: Create masters and hosts file
+  template: src={{ item.src }} dest={{ item.dest }} mode=preserve
+  with_items:
+      - { src: 'hosts.j2', dest: '{{role_path}}/../../environments/dev/hosts', env: 'dev' }
+      - { src: 'hosts.j2', dest: '{{role_path}}/../../environments/uat/hosts', env: 'uat' }
+      - { src: 'hosts.j2', dest: '{{role_path}}/../../environments/dev/hosts', env: 'dev' }
+      - { src: 'hosts.j2', dest: '{{role_path}}/../../environments/uat-2/hosts', env: 'uat_2' }
+      - { src: 'hosts.j2', dest: '{{role_path}}/../../environments/qa/hosts', env: 'qa' }
+  delegate_to: localhost
+

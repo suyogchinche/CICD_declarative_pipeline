@@ -19,6 +19,7 @@ Table of contents
       * [Ansible](#ansible)
       * [Kubernetes](#kubernetes)
       * [Jenkins](#jenkins)
+      * [Helm Charts](#helmcharts)
    * [Visualization of Containers](#visualization-of-containers)
    * [Operational Activities](#operational-activities)
       * [Application Deployment on k8s](#application-deployment-on-k8s)
@@ -32,6 +33,7 @@ Table of contents
       * [Backup and Restoration of k8s resources using Heptio Velero](#backup-and-restoration-of-k8s-resources-using-heptio-velero)
    * [Monitoring](#monitoring)
    * [Dev-Ops Best Practices](#devops-best-practices)
+   * [Development Setup](#development-setup)
    * [Objectives](#objectives)
 <!--te-->
 
@@ -67,16 +69,16 @@ Software Metrics
 
 |Category                    |Tools               |Subtools/Plugin     |Version   |Purpose                                                                                      |
 |----------------------------|--------------------|--------------------|----------|---------------------------------------------------------------------------------------------|
-|Development                 |Springboot          |springframework     |2.2.1     |Easy in developing webservices                                                               |
-|                            |                    |swagger             |1.2.4     |To share documentation of REST API                                                           |
+|Development                 |Springboot          |springframework     |2.2.1     |Easy to develop microservices                                                               |
+|                            |                    |swagger             |1.2.4     |To build documentation for all restAPIs                                                           |
 |                            |                    |Config Server/Client|2.2.1     |Used distributed configuration server to store configuration                                 |
-|                            |                    |Openfeign           |2.2.1     |To communication one microservice with other microservice                                    |
+|                            |                    |Openfeign           |2.2.1     |To communicate one microservice with other microservice                                    |
 |                            |                    |thymeleaf           |2.2.1     |Its modern Java template to build a web environemnt                                          |
 |                            |                    |spring data mongodb |2.2.1     |To interact with mongo db                                                                    |
 |                            |                    |Zuul                |2.2.1     |To use proxy server and centralize swagger, this is why we havent used ingress k8s controller|
 |Project building Tool       |Maven               |Maven               |3.6.2     |To build Spring boot project                                                                 |
-|                            |                    |Surefire            |          |Surefire is default plugin to generate Unit test report [Junit and TestNG]                   |
-|                            |                    |failsafe            |          |Used for Integration testing                                                                 |
+|                            |                    |Surefire            |          |Surefire is default plugin to generate Unit test case report [Junit and TestNG]                   |
+|                            |                    |failsafe            |          |Used to generate integration test report                                                                 |
 |                            |                    |jacoco              |          |Used to check criteria of newly developed code                                               |
 |                            |                    |cucumber            |          |used for Behavior Driven Development                                                         |
 |                            |                    |sonar               |          |Use for static code analysis                                                                 |
@@ -1115,8 +1117,178 @@ Steps will be provided soon
 <p align="center"><img width="1000" height="500" src=".images/kibana_index_withfilterlogs.PNG"></p>
 
 
+Development Setup
+==================
+
+1. Install eclipse IDE
+2. Clone and import project
+3. Use openjdk 1.8 libraries
+4. install lambok
+5. Install mongo db
+6. Add env variables in maven build
+7. Run microservices one by one
+8. Access and get rest apis from swagger URL
+9. Debug springboot application
+
+Install eclipse IDE
+-------------------
+Eclipse IDE for Enterprise Java and Web Developers (includes Incubating components) or STS
+
+Clone and import project
+------------------
+* Go to </br> 
+File ->import -> project from git(With smart import) ->Clone URI 
+* Provide this url  </br>
+https://github.com/svchinche/CCOMS.git
+* and then select the branch 
+* then select package explorer
 
 
+Use openjdk 1.8 libraries
+-------------------------
+* Go to - https://www.openlogic.com/openjdk-downloads and download and untar jdk libraries in program files folder. 
+* Go to </br>
+Window -> Preferences -> Search for jre -> installed JRE -> update JDK path
+
+<p align="center"><img width="1000" height="500" src=".images/installed-jre.PNG"></p>
+
+
+Install lambok
+------------
+
+* Close your IDE 
+* Download the Lombok jar from the https://projectlombok.org/download 
+* Double click the jar 
+* Follow the steps mentioned in the https://projectlombok.org/setup/eclipse 
+* Open your IDE 
+* Refer below link </br>
+https://stackoverflow.com/questions/50991619/the-method-builder-is-undefined-for-the-type-builderexample
+
+
+ 
+Install Mongo db
+-----------------
+Install mongo latest on windows or any linux version with version 4 </br>
+
+**On Windows**
+* Go to below link</br>
+https://www.mongodb.com/try/download/community
+
+* select --> on premises --> mongo db community server -> 3.4.23 then download/community 
+
+* Create db folder under data directory </br>
+C:\data\db 
+
+* Go to -> C:\Program Files\MongoDB\Server\3.4\bin
+  *  Double click mongod.exe to start db service  
+  * Double click mongo.exe to get mongo terminal 
+
+* Note- You can create windows shortcut to start mongodb
+
+**Linux docker daemon, you can use below commands** 
+```sh
+docker run -dit -p 27017:27017 --name=mongo mongo:latest
+docker exec -it mongo sh
+mongo
+```
+
+* Run below commands on mongodb server 
+
+```sh   
+use admin;   
+db.createUser(
+  {
+    user: "admin",
+    pwd: "admin123",
+    roles: [ { role: "readWrite", db: "admin" } ]
+  }
+)
+
+```
+
+Add Env variable in maven build
+---------------------------------
+
+* Go to Run As -> Run Configurations ->  
+* Update base directory -> ${project_loc:${project_name}} 
+* Goals -> spring-boot:run 
+<p align="center"><img width="1000" height="500" src=".images/base_directory.PNG"></p>
+
+*Note:* For every microservice we will have to create  maven build
+<p align="center"><img width="1000" height="500" src=".images/env_variables.PNG"></p>
+
+
+**Environment variables**
+
+```java
+app.profile=dev
+CCOMS_DATABASE_PORT=27017
+CCOMS_EMP_PORT=8081
+CCOMS_DEPT_PORT=8082
+CCOMS_ORG_PORT=8083
+CCOMS_ZUUL_PORT=8111
+CONFIG_HOST=localhost
+DATABASE=admin
+DB_PASSWD=admin123
+DB_USER=admin
+DEPT_HOST=localhost
+EMP_HOST=localhost
+ORG_HOST=localhost
+MONGO_HOST=localhost
+server.port=8081
+```
+
+**Update MONGO_HOST and server.port for each microservice**
+
+```
+Config -- 8888 
+employee-- 8081
+department -- 8082
+organization -- 8083
+Proxy -- 8111 
+```
+
+Run microservices one by one
+---------------------------
+* Config
+  * Run and check if below url is working or not - http://localhost:8888/employee-microservice/dev
+* Employee
+  * Run and check the logs, there should not be any exception in the logs
+* Department
+* Organization
+* Proxy
+
+* URLS for verifications
+  * http://localhost:8111/swagger-ui.html 
+  * http://localhost:8111/emp/pretty 
+  * http://localhost:8111/dept/pretty 
+  * http://localhost:8111/org/pretty 
+
+
+Access and get rest apis from swagger URL
+---------------------------------------
+* http://localhost:8111/swagger-ui.html 
+
+* Add data using this url and refer below link for json files
+https://github.com/svchinche/CCOMS/tree/feature-1235/kubernetes/ansible_k8s-ccoms-deployment/scripts/post_ccoms/json_files </br>
+
+* Go to -->  employee-rest-controller --> POST -> api/addemps and copy employee data from above location and try it out and finally execute </br>
+similarly you can do it for other microservices.
+
+Debug Spring boot application
+------------------------------
+* Add spring tools plugin from eclipse market place
+<p align="center"><img width="600" height="200" src=".images/eclipse_market_place.PNG"></p>
+
+* Set breakpoint for debugging
+
+* Debug application as Spring Boot App to add entry (This has to be done once for creating run spring boot configuration)
+<p align="center"><img width="1000" height="500" src=".images/run_as_spring_boot_app.PNG"></p>
+
+* Add env variables and then run.
+<p align="center"><img width="1000" height="500" src=".images/springboot_debug.PNG"></p>
+
+    
 DevOps Best Practices
 ======================
 
@@ -1128,5 +1300,4 @@ If the same thing happened with newbies, they might lose there interest in devop
 
 Quote
 -----
-Hard work pays off, Bootlicking will not help you to grow in long term. It will end up with problem.
-My final words to everyone: Only hard work will help you to grow
+Only hard work will help you to grow

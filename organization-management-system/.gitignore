@@ -4,6 +4,7 @@ HELP.md
 !**/src/main/**
 !**/src/test/**
 *.class
+**/logs/
 
 ### STS ###
 .apt_generated

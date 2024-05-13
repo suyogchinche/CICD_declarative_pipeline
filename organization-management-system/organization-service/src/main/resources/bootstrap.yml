@@ -18,7 +18,7 @@ spring:
   cloud:
     config:
       fail-fast: true
-      uri: http://cfg.ccoms.com:8888
+      uri: http://${CONFIG_HOST}:8888
       retry:
         max-attempts: 20
         max-interval: 10000 

@@ -1,0 +1,9 @@
+---
+- name: "Check if maven, already installed"
+  file:
+    path: "{{ maven.path }}/apache-maven-{{ maven.version }}"
+    state: directory
+  notify:
+    - "Install Maven"
+
+

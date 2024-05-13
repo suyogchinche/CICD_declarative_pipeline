@@ -1,0 +1,4 @@
+---
+# vars file for ccoms
+namespace: ccoms
+checkout_loc: /data1

@@ -1,0 +1,13 @@
+---
+# vars file for devops_setup
+
+maven:
+  location: "http://us.mirrors.quenda.co/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz"
+  version: "3.6.3"
+  path: "/usr/local/apache-maven"
+  master_password: master_password
+  docker_user: "suyogchinche"
+  docker_password: docker_password
+  nexus_user: nexus_user
+  nexus_password: nexus_password
+  nexus_maven_public_url: nexus_maven_public_url 

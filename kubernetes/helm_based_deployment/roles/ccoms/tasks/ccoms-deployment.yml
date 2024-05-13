@@ -1,0 +1,34 @@
+## task file for ccoms-deployment
+--- 
+- name: "Remove helm charts"
+  file:
+    path: "{{ checkout_loc }}"
+    state: absent
+
+- name: "Create /data1/helm-chart dir on k8s master node"
+  file:
+    path: "{{ checkout_loc }}"
+    state: directory
+
+- name: "Tacking helm checkout"
+  git:
+    repo: "{{ helm_repo }}"
+    dest: "{{ checkout_loc }}/helm-chart"
+    clone: yes
+
+- name: "Add ccoms helm repo"
+  shell: 'helm repo add ccoms_repo https://svchinche.github.io/helm-chart/'
+ 
+- name: "Deploying CCOMS application using helm"
+  shell: |
+    {{ checkout_loc }}/helm-chart/source_code/deploy_ccoms.sh -n {{ namespace }}
+  register: deploy_logs
+
+- name: "Printing error messgae"
+  debug:
+    msg: "{{ deploy_logs }}"
+
+- name: "Remove helm charts"
+  file:
+    path: "{{ checkout_loc }}"
+    state: absent

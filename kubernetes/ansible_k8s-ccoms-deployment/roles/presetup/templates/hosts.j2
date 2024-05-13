@@ -1,0 +1,59 @@
+{% if item.env == "dev" %}
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host={{ dev.ansible.ansible_host }} ansible_port=22 ansible_user={{ dev.ansible.ansible_user }} ansible_ssh_pass={{ dev.ansible.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[k8s_nodes]
+k8s_master ansible_host={{ dev.k8s.ansible_host }} ansible_port=22 ansible_user={{ dev.k8s.ansible_user }} ansible_ssh_pass={{ dev.k8s.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+{% endif %}
+
+
+{% if item.env == "uat" %}
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host={{ uat.ansible.ansible_host }} ansible_port=22 ansible_user={{ uat.ansible.ansible_user }} ansible_ssh_pass={{ uat.ansible.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[k8s_nodes]
+k8s_master ansible_host={{ uat.k8s.ansible_host }} ansible_port=22 ansible_user={{ uat.k8s.ansible_user }} ansible_ssh_pass={{ uat.k8s.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+{% endif %}
+
+
+{% if item.env == "qa" %}
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host={{ qa.ansible.ansible_host }} ansible_port=22 ansible_user={{ qa.ansible.ansible_user }} ansible_ssh_pass={{ qa.ansible.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[k8s_nodes]
+k8s_master ansible_host={{ qa.k8s.ansible_host }} ansible_port=22 ansible_user={{ qa.k8s.ansible_user }} ansible_ssh_pass={{ qa.k8s.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+{% endif %}
+
+
+{% if item.env == "prod" %}
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host={{ prod.ansible.ansible_host }} ansible_port=22 ansible_user={{ prod.ansible.ansible_user }} ansible_ssh_pass={{ prod.ansible.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[k8s_nodes]
+k8s_master ansible_host={{ prod.k8s.ansible_host }} ansible_port=22 ansible_user={{ prod.k8s.ansible_user }} ansible_ssh_pass={{ prod.k8s.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+{% endif %}
+
+
+{% if item.env == "uat_2" %}
+[k8s_master_and_workers:children]
+k8s_nodes
+
+[ansible_nodes]
+ansible_node ansible_host={{ uat_2.ansible.ansible_host }} ansible_port=22 ansible_user={{ uat_2.ansible.ansible_user }} ansible_ssh_pass={{ uat_2.ansible.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+
+[k8s_nodes]
+k8s_master ansible_host={{ uat_2.k8s.ansible_host }} ansible_port=22 ansible_user={{ uat_2.k8s.ansible_user }} ansible_ssh_pass={{ uat_2.k8s.ansible_ssh_pass }} ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+{% endif %}
+

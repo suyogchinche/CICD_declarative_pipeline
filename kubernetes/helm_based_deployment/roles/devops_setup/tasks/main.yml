@@ -1,0 +1,6 @@
+---
+# tasks file for devops_setup
+- include_tasks: maven.yml
+#- include_tasks: docker.yml
+#- include_tasks: ansible.yml
+#- include_tasks: k8s.yml

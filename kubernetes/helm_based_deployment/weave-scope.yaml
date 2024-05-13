@@ -1,0 +1,6 @@
+- name: "Install weave scope"
+  hosts: localhost
+  gather_facts: True
+  roles:
+  - weave
+

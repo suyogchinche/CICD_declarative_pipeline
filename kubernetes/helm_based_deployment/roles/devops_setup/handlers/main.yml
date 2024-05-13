@@ -1,0 +1,58 @@
+---
+# handlers file for devops_setup
+- name: "Download Binary"
+  get_url:
+    url: "{{ maven.location }}"
+    dest: "{{ role_path }}/files/"
+  listen: "Install Maven" 
+  
+- name: "Unarchieve Binary"
+  unarchive: 
+    src: "{{ role_path }}/files/apache-maven-{{ maven.version }}-bin.tar.gz"
+    dest: "{{ maven.path }}/" 
+  listen: "Install Maven" 
+
+- name: "Set home directory"
+  shell: |
+    export M2_HOME="{{ maven.path }}/apache-maven-{{ maven.version }}"
+    export PATH="$M2_HOME/bin:$PATH"
+    grep 'M2_HOME=.*3.6.3' || ( sed -i '/M2_HOME/d;$ a\export M2_HOME=$M2_HOME\nPATH="$M2_HOME/bin:$PATH"' ~/.bashrc )
+  listen: "Install Maven" 
+
+- name: Encrypt Maven master password
+  shell: mvn --encrypt-master-password "{{ maven.master_password }}"
+  register: encryption_master_password
+  listen: "Install Maven" 
+
+- name: Update master password in ~/.m2/settings-security.xml
+  template:
+    src: settings-security.xml
+    dest: ~/.m2/settings-security.xml
+  vars:
+  - encrypted_maven_master_password: "{{ encryption_master_password.stdout }}"
+  listen: "Install Maven" 
+
+- name: Encrypt Nexus password
+  shell: mvn --encrypt-password "{{ maven.nexus_password }}"
+  register: encryption_nexus_password
+  listen: "Install Maven" 
+
+- name: Encrypt Docker password
+  shell: mvn --encrypt-password "{{ maven.docker_password }}"
+  register: encryption_docker_password
+  listen: "Install Maven" 
+
+- name: "Store Encrypted password in the ~/.m2/settings.xml"
+  template:
+    src: settings.xml
+    dest: ~/.m2/settings.xml
+  vars:
+  - encrypted_nexus_password: "{{ encryption_nexus_password.stdout }}"
+    encrypted_docker_password: "{{ encryption_docker_password.stdout }}"
+  listen: "Install Maven" 
+      
+- name: "Remove downloaded tar file"
+  file:
+    path: "{{ role_path }}/files/apache-maven-{{ maven.version }}-bin.tar.gz"
+    state: absent
+  listen: "Install Maven"

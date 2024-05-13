@@ -3,7 +3,9 @@ data:
   Corefile: |
     .:53 {
         errors
-        health
+        health {
+            lameduck 5s
+        }
 
         rewrite name cfg.ccoms.com cfg.ccoms.svc.cluster.local
         rewrite name dept.ccoms.com dept.ccoms.svc.cluster.local
@@ -12,13 +14,14 @@ data:
         rewrite name proxy.ccoms.com proxy.ccoms.svc.cluster.local
         rewrite name db.mongo.com db.mongo.svc.cluster.local
 
+        ready
         kubernetes cluster.local in-addr.arpa ip6.arpa {
-           pods insecure
-           upstream
-           fallthrough in-addr.arpa ip6.arpa
+            pods insecure
+            fallthrough in-addr.arpa ip6.arpa
+            ttl 30
         }
         prometheus :9153
-        proxy . /etc/resolv.conf
+        forward . /etc/resolv.conf
         cache 30
         loop
         reload
