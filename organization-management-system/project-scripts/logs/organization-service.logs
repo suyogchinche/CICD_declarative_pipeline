@@ -1,0 +1,99 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.cloudcomp.ccoms:org-service >-------------------
+[INFO] Building org-service ${revision}
+[INFO]   from pom.xml
+[INFO] --------------------------------[ war ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:2.2.1.RELEASE:run (default-cli) > test-compile @ org-service >>>
+[INFO] 
+[INFO] --- jacoco:0.8.5:prepare-agent (default) @ org-service ---
+[INFO] argLine set to -javaagent:/Users/suyogchinche/.m2/repository/org/jacoco/org.jacoco.agent/0.8.5/org.jacoco.agent-0.8.5-runtime.jar=destfile=/Users/suyogchinche/git/CCOMS/organization-management-system/organization-service/target/jacoco.exec,append=true
+[INFO] 
+[INFO] --- resources:3.1.0:resources (default-resources) @ org-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 0 resource
+[INFO] Copying 2 resources
+[INFO] 
+[INFO] --- compiler:3.8.1:compile (default-compile) @ org-service ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.1.0:testResources (default-testResources) @ org-service ---
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] 
+[INFO] --- compiler:3.8.1:testCompile (default-testCompile) @ org-service ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] <<< spring-boot:2.2.1.RELEASE:run (default-cli) < test-compile @ org-service <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:2.2.1.RELEASE:run (default-cli) @ org-service ---
+[INFO] Attaching agents: []
+2024-05-13 14:40:27.707  INFO 14908 --- [  restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-05-13 14:40:27.835  INFO 14908 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.retry.annotation.RetryConfiguration' of type [org.springframework.retry.annotation.RetryConfiguration$$EnhancerBySpringCGLIB$$e6e13e8d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-05-13 14:40:27.836  INFO 14908 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$d37a965] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.2.1.RELEASE)
+
+2024-05-13 14:40:27.902  INFO 14908 --- [  restartedMain] c.c.c.ConfigServicePropertySourceLocator : Fetching config from server at : http://localhost:8888
+2024-05-13 14:40:28.479  INFO 14908 --- [  restartedMain] c.c.c.ConfigServicePropertySourceLocator : Located environment: name=organization-microservice, profiles=[dev], label=null, version=a229cfc6da0c6c92c6cb52bec1311599a1cae488, state=null
+2024-05-13 14:40:28.480  INFO 14908 --- [  restartedMain] b.c.PropertySourceBootstrapConfiguration : Located property source: OriginTrackedCompositePropertySource {name='configService', propertySources=[MapPropertySource {name='configClient'}, OriginTrackedMapPropertySource {name='https://github.com/svchinche/CCOMS-configfiles.git/config-files/dev/organization-microservice-dev.yaml'}, OriginTrackedMapPropertySource {name='https://github.com/svchinche/CCOMS-configfiles.git/config-files/default/organization-microservice.yaml'}]}
+2024-05-13 14:40:28.483  INFO 14908 --- [  restartedMain] com.cloudcomp.ccoms.org.Application      : The following profiles are active: dev
+2024-05-13 14:40:28.726  INFO 14908 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2024-05-13 14:40:28.745  INFO 14908 --- [  restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17ms. Found 1 repository interfaces.
+2024-05-13 14:40:28.809  INFO 14908 --- [  restartedMain] o.s.cloud.context.scope.GenericScope     : BeanFactory id=95e96ddf-8bd8-323d-b8d1-3ee43a33e1cd
+2024-05-13 14:40:28.853  INFO 14908 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.retry.annotation.RetryConfiguration' of type [org.springframework.retry.annotation.RetryConfiguration$$EnhancerBySpringCGLIB$$e6e13e8d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-05-13 14:40:28.859  INFO 14908 --- [  restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration' of type [org.springframework.cloud.autoconfigure.ConfigurationPropertiesRebinderAutoConfiguration$$EnhancerBySpringCGLIB$$d37a965] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2024-05-13 14:40:29.008  INFO 14908 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8083 (http)
+2024-05-13 14:40:29.011  INFO 14908 --- [  restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-13 14:40:29.012  INFO 14908 --- [  restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.27]
+2024-05-13 14:40:29.047  INFO 14908 --- [  restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-13 14:40:29.047  INFO 14908 --- [  restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 556 ms
+2024-05-13 14:40:29.136  INFO 14908 --- [  restartedMain] org.mongodb.driver.cluster               : Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+2024-05-13 14:40:29.136  INFO 14908 --- [  restartedMain] org.mongodb.driver.cluster               : Adding discovered server localhost:27017 to client view of cluster
+2024-05-13 14:40:29.156  INFO 14908 --- [localhost:27017] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:1, serverValue:43}] to localhost:27017
+2024-05-13 14:40:29.158  INFO 14908 --- [localhost:27017] org.mongodb.driver.cluster               : Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[7, 0, 9]}, minWireVersion=0, maxWireVersion=21, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1645500}
+2024-05-13 14:40:29.158  INFO 14908 --- [localhost:27017] org.mongodb.driver.cluster               : Discovered cluster type of STANDALONE
+2024-05-13 14:40:29.172  WARN 14908 --- [  restartedMain] o.s.data.convert.CustomConversions       : Registering converter from class java.time.LocalDateTime to class java.time.Instant as reading converter although it doesn't convert from a store-supported type! You might wanna check you annotation setup at the converter implementation.
+2024-05-13 14:40:29.172  WARN 14908 --- [  restartedMain] o.s.data.convert.CustomConversions       : Registering converter from class java.time.Instant to class java.time.LocalDateTime as reading converter although it doesn't convert from a store-supported type! You might wanna check you annotation setup at the converter implementation.
+2024-05-13 14:40:29.199  WARN 14908 --- [  restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
+2024-05-13 14:40:29.201  WARN 14908 --- [  restartedMain] o.s.data.convert.CustomConversions       : Registering converter from class java.time.LocalDateTime to class java.time.Instant as reading converter although it doesn't convert from a store-supported type! You might wanna check you annotation setup at the converter implementation.
+2024-05-13 14:40:29.201  WARN 14908 --- [  restartedMain] o.s.data.convert.CustomConversions       : Registering converter from class java.time.Instant to class java.time.LocalDateTime as reading converter although it doesn't convert from a store-supported type! You might wanna check you annotation setup at the converter implementation.
+2024-05-13 14:40:29.213  WARN 14908 --- [  restartedMain] .m.c.i.MongoPersistentEntityIndexCreator : Automatic index creation will be disabled by default as of Spring Data MongoDB 3.x.
+	Please use 'MongoMappingContext#setAutoIndexCreation(boolean)' or override 'MongoConfigurationSupport#autoIndexCreation()' to be explicit.
+	However, we recommend setting up indices manually in an application ready block. You may use index derivation there as well.
+
+	> -----------------------------------------------------------------------------------------
+	> @EventListener(ApplicationReadyEvent.class)
+	> public void initIndicesAfterStartup() {
+	>
+	>     IndexOperations indexOps = mongoTemplate.indexOps(DomainType.class);
+	>
+	>     IndexResolver resolver = new MongoPersistentEntityIndexResolver(mongoMappingContext);
+	>     resolver.resolveIndexFor(DomainType.class).forEach(indexOps::ensureIndex);
+	> }
+	> -----------------------------------------------------------------------------------------
+
+2024-05-13 14:40:29.266  INFO 14908 --- [  restartedMain] org.mongodb.driver.connection            : Opened connection [connectionId{localValue:2, serverValue:44}] to localhost:27017
+2024-05-13 14:40:29.444  INFO 14908 --- [  restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+2024-05-13 14:40:29.450  WARN 14908 --- [  restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2024-05-13 14:40:29.450  INFO 14908 --- [  restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2024-05-13 14:40:29.452  WARN 14908 --- [  restartedMain] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2024-05-13 14:40:29.452  INFO 14908 --- [  restartedMain] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2024-05-13 14:40:29.488  INFO 14908 --- [  restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2024-05-13 14:40:29.568  INFO 14908 --- [  restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2024-05-13 14:40:29.575  INFO 14908 --- [  restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2024-05-13 14:40:29.584  INFO 14908 --- [  restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2024-05-13 14:40:29.638  INFO 14908 --- [  restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8083 (http) with context path ''
+2024-05-13 14:40:29.640  INFO 14908 --- [  restartedMain] com.cloudcomp.ccoms.org.Application      : Started Application in 2.15 seconds (JVM running for 2.334)
+2024-05-13 14:41:58.487  INFO 14908 --- [nio-8083-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-13 14:41:58.487  INFO 14908 --- [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-13 14:41:58.491  INFO 14908 --- [nio-8083-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2024-05-13 15:32:14.414  INFO 14908 --- [nio-8083-exec-3] c.c.c.o.c.OrganizationRestController     : Organization add: [com.cloudcomp.ccoms.org.model.Organization@53a75e3d, com.cloudcomp.ccoms.org.model.Organization@5f186476]
