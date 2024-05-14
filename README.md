@@ -127,6 +127,16 @@ Below is the screenshot of overall cucumber results and one of scenario.</br>
 
 <p align="center"><img width="800" height="400" src=".images/cucumber_emp_result.PNG"></p>
 
+Developer can generate test cases from feature file as below.
+
+Right click on feature file and then run as cucumber feature, it will help us to write steps/test cases.
+
+<p align="center"><img width="800" height="400" src=".images/cucumber-run-as.png"></p>
+
+
+<p align="center"><img width="800" height="400" src=".images/cucumber-step-def-console.png"></p>
+
+
 How Team Works in Agile Based Project
 ------------------
 - Business analyst or customer write the feature file
