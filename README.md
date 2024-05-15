@@ -122,6 +122,26 @@ BDD is an agile technique that brings developers, analysts and testers together 
 Scenarios that are written in a behaviour-driven development format allow business analysts to specify events, conditions, and actions which can later serve as acceptance test criteria.</br>
 
 Below is the screenshot of overall cucumber results and one of scenario.</br>
+maven test plugin is used to generate test cases and its report to target folder.
+then we use cucumber jenkins plugin to create report on jenkins as below
+
+```jenkins
+        stage('Gen-Cucumber-Report&verify-jacoco'){
+            steps {
+                sh 'mvn -f ${APP_ROOT_DIR}/pom.xml -T 4 -Drevision="${REVISION}" jacoco:prepare-agent surefire-report:report jacoco:report jacoco:check@jacoco-check'
+            }
+            post {
+                success {
+                    cucumber failedFeaturesNumber: -1, failedScenariosNumber: -1, failedStepsNumber: -1, fileIncludePattern: 'organization-management-system/**/*.json', pendingStepsNumber: -1, skippedStepsNumber: -1, sortingMethod: 'ALPHABETICAL', undefinedStepsNumber: -1
+                    jacoco inclusionPattern: '**/*.class'
+                    
+                }
+                failure {
+                    emailextrecipients([developers(), upstreamDevelopers(), culprits()])
+                }
+            }	
+        }
+```
 
 <p align="center"><img width="800" height="400" src=".images/cucumber_result.PNG"></p>
 
