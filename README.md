@@ -122,7 +122,21 @@ BDD is an agile technique that brings developers, analysts and testers together 
 Scenarios that are written in a behaviour-driven development format allow business analysts to specify events, conditions, and actions which can later serve as acceptance test criteria.</br>
 
 
-maven test plugin is used to generate test cases and its report to target folder.</br>
+maven uses junit framework to run the test cases. in our case we have cucumber integrated with it.
+below is the snippet of test class.</br>
+
+```
+organization-management-system/employee-service/src/test/java/com/cloudcomp/ccoms/emp/controller/CucumberEmpTest.java
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features = "src/test/resources/features", plugin = {
+        "json:target/cucumber-report.json" }, monochrome = true)
+public class CucumberEmpTest {
+
+}
+```
+
+surefire plugin is used to generate test cases and its report to target folder.</br>
 then we use cucumber jenkins plugin to create report on jenkins as below </br>
 
 ```jenkins
